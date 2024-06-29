@@ -1,0 +1,96 @@
+﻿CoT (Сhain-of-Thought) / Метод «Цепочка мыслей»
+
+
+"1.Classify the message written by the developers of the open source software in the pull request. 2.Assign one or more categories from the provided list to the message: - Problem - Solution - Question - Call to action - Status of actions - Personal responsibility - Approval - Clarifying - Procedural suggestion. 3.Result format: ONLY category or categories that best fit the message's intent. Let’s think step by step."
+___________________________________________________________________________
+
+
+CARP (Clue And Reasoning Prompting) / Метод «Подсказок и рассуждений»
+
+
+This is a classifier the message written by the developers of the open source software in the pull request. 
+First, list CLUES (i.e., keywords, phrases, contextual information, semantic relations, semantic meaning, tones, references) for determining the intent of the input. 
+Next, deduce a diagnostic reasoning process from clues and the input to determine the overall intent. 
+Finally, considering clues, the reasoning process and the input determine the intent of input as one or more categories from the provided list to the message: - Problem - Solution - Question - Call to action - Status of actions - Personal responsibility - Approval - Clarifying - Procedural suggestion.
+Output format: ONLY category or categories that best fit the input's intent in JSON.
+__________________________________________________________________________
+
+
+Coding instruction / Полнотекстовая кодировочная инструкция
+
+
+Classify the message written by the developers of the open source software in the pull request. 2.Assign one or more categories from the provided list to the message:
+- Problem — Identification of factors that interfere with the development or implementation of the code, as well as their indicators and effects;
+- Solution — Demonstration of a code or solution that allows you to get rid of factors that interfere with software development;
+- Question — Request a participant's opinion on a proposal, idea, solution;
+- Call to action — Request to perform specific actions;
+- Status of actions — Informing others about the actions being performed or completed;
+- Personal responsibility — the intention to perform a specific action;
+- Approval — Agreement with the proposal, idea, decision;
+- Clarifying — Providing additional information to explain previously added information;
+- Procedural suggestion — Actions that are not related to solving problems, but ensure the development process.
+Output format: ONLY category or categories that best fit the input's intent in JSON.
+__________________________________________________________________________
+
+
+Few-Shot Prompting k=2 / Обучение с помощью нескольких примеров 
+
+
+1.Classify the message written by the developers of the open source software in the pull request. 2.Assign one or more categories from the provided list to the message: - Problem - Solution - Question - Call to action - Status of actions - Personal responsibility - Approval - Clarifying - Procedural suggestion. 3.Result format: ONLY category or categories that best fit the message's intent.3.Result format: ONLY category or categories that best fit the message's intent. 
+
+
+EXAMPLES
+
+
+INPUT: Thanks. I expected a more ugly change with more C code but this PR seems ok!
+OUTPUT: Approval
+INPUT: Yeah, I am fine with that
+OUTPUT: Approval
+
+
+INPUT: Let me know if you can do that
+OUTPUT: Call to action
+INPUT: could you address the failing CI checks?
+OUTPUT: Call to action
+
+
+INPUT: I forgot to mention, libayatana also includes libc6 and libc6.1.
+OUTPUT: Clarifying
+INPUT: we don't need to add another button that keeps the UI more clean
+OUTPUT: Clarifying
+
+
+INPUT: I will test this out in a few days
+OUTPUT:Personal responsibility
+INPUT: I will check in a few hours, it's not a big deal if you don't fix it
+OUTPUT:Personal responsibility
+
+
+INPUT: It looks like the library it's failing to identify the standard implementation that it should be using
+OUTPUT:Problem
+INPUT: The main issue we're trying to solve here is that webSecurity
+OUTPUT:Problem
+
+
+INPUT: Please rebase this on top of current master
+OUTPUT:Procedural suggestion
+INPUT: I'm now marking this PR as ready for review.
+OUTPUT:Procedural suggestion
+
+
+INPUT: Are you looking for something like this?
+OUTPUT:Question
+INPUT: Just curious on why not use email strategy?
+OUTPUT:Question
+
+
+INPUT: We should instead implement impl TryFrom<Secret<...>>
+OUTPUT:Solution
+INPUT: You could also create a new send_tab_new.dart to avoid future conflicts
+OUTPUT:Solution
+
+
+INPUT: Fixed, rebased & squashed.
+OUTPUT:Status of actions
+INPUT: Updates that are done
+OUTPUT:Status of actions
